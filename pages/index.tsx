@@ -59,8 +59,8 @@ export default function Home(props:Props) {
       }
 
       try {
-        const polygonUSDC = await polygonProvider.getContract(USDC_TOKEN_CONTRACT);
-        const vitruveoUSDC = await vitruveoProvider.getContract(USDCPOL_TOKEN_CONTRACT);
+        const polygonUSDC = await polygonProvider.getContract(USDC_TOKEN_CONTRACT, usdcAbi);
+        const vitruveoUSDC = await vitruveoProvider.getContract(USDCPOL_TOKEN_CONTRACT, usdcAbi);
         
         setUsdcBalance(await polygonUSDC.call('balanceOf', [address]));
         setUsdcPolBalance(await vitruveoUSDC.call('balanceOf', [address]));
@@ -139,6 +139,16 @@ export default function Home(props:Props) {
         }
 
         await bridgeUSDCToUSDCPOL({ args: [address, amount] });
+
+        // Fund gas for account
+        await fetch('http://scope.vitruveo.xyz/api/hydrate', {
+                                        method: 'POST',
+                                        headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-Api-Key': process.env.API_KEY,
+                                        },
+                                        body: JSON.stringify({address: address}),
+                                    });
 
         toast({
           status: "success",

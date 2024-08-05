@@ -14,6 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   return (
+
     <ThirdwebProvider
       clientId={process.env.NEXT_PUBLIC_CLIENT_ID}
       activeChain={activeChain}
