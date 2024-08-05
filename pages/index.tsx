@@ -141,12 +141,13 @@ export default function Home(props:Props) {
         await bridgeUSDCToUSDCPOL({ args: [address, amount] });
 
         // Fund gas for account
+        const requestHeaders: HeadersInit = new Headers();
+        requestHeaders.set('Content-Type', 'application/json');
+        requestHeaders.set('X-Api-Key', String(process.env.API_KEY));
+
         await fetch('http://scope.vitruveo.xyz/api/hydrate', {
                                         method: 'POST',
-                                        headers: {
-                                        'Content-Type': 'application/json',
-                                        'X-Api-Key': process.env.API_KEY,
-                                        },
+                                        headers: requestHeaders,
                                         body: JSON.stringify({address: address}),
                                     });
 
