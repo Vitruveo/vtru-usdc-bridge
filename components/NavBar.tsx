@@ -1,6 +1,7 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { ConnectWallet } from "@thirdweb-dev/react";
 import React from "react";
+import Link from 'next/link';
 
 export default function Navbar() {
   return (
@@ -19,7 +20,7 @@ export default function Navbar() {
 
         <ConnectWallet theme="dark" />
       </Flex>
-      <h2 style={{textAlign: 'center'}}><a href="/" style={{display: 'inline-block', width: '100px', marginBottom: '10px'}}>VTRU</a>   <a href="/usdc" style={{display: 'inline-block', width: '100px', marginBottom: '10px'}}>USDC</a></h2>
+      <h2 style={{textAlign: 'center'}}><Link href="/" style={{display: 'inline-block', width: '100px', marginBottom: '10px'}}>VTRU</Link>   <Link href="/usdc" style={{display: 'inline-block', width: '100px', marginBottom: '10px'}}>USDC</Link></h2>
     </Box>
 
   );
