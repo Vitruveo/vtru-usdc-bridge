@@ -15,8 +15,12 @@ export default function Navbar() {
         px={{ base: "5", xl: "0" }}
       >
         <img src="/images/vitruveo-white.webp" alt="Vitruveo logo" style={{height: '45px'}} />
+
+
         <ConnectWallet theme="dark" />
       </Flex>
+      <h2 style={{textAlign: 'center'}}><a href="/" style={{display: 'inline-block', width: '100px', marginBottom: '10px'}}>VTRU</a>   <a href="/usdc" style={{display: 'inline-block', width: '100px', marginBottom: '10px'}}>USDC</a></h2>
     </Box>
+
   );
 }

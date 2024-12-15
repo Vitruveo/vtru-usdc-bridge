@@ -1,6 +1,6 @@
 import Head from "next/head";
-import Navbar from "../components/NavBar";
-import SwapInput from "../components/SwapInput";
+import Navbar from "../../components/NavBar";
+import SwapInput from "../../components/SwapInput";
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 
 import {
@@ -9,7 +9,7 @@ import {
   Spinner,
   useToast,
 } from "@chakra-ui/react";
-import { POLYGON_CHAIN, VITRUVEO_CHAIN, VIA_POLYGON_CONTRACT, VIA_VITRUVEO_CONTRACT, USDCPOL_TOKEN_CONTRACT, USDC_TOKEN_CONTRACT, VIA_ABI, USDC_ABI } from "../const/details";
+import { POLYGON_CHAIN, VITRUVEO_CHAIN, VIA_POLYGON_CONTRACT, VIA_VITRUVEO_CONTRACT, USDCPOL_TOKEN_CONTRACT, USDC_TOKEN_CONTRACT, VIA_ABI, USDC_ABI } from "../../const/details";
 import {
   ConnectWallet,
   useAddress,
@@ -21,11 +21,8 @@ import {
 import { useState, useEffect } from "react";
 import { _0xhashTestnet } from "@thirdweb-dev/chains";
 
-interface Props {
-  chainSwitchHandler: Function
-}
 
-export default function Home(props:Props) {
+export default function Home(props) {
 
   const toast = useToast();
   const address = useAddress();
@@ -40,10 +37,10 @@ export default function Home(props:Props) {
   const [usdcAllowance, setUsdcAllowance] = useState(0);
   const [usdcPolAllowance, setUsdcPolAllowance] = useState(0);
   
-  const [usdcValue, setUsdcValue] = useState<string>("0");
+  const [usdcValue, setUsdcValue] = useState("0");
 
-  const [currentFrom, setCurrentFrom] = useState<string>("usdc");
-  const [loading, setLoading] = useState<boolean>(false);
+  const [currentFrom, setCurrentFrom] = useState("usdc");
+  const [loading, setLoading] = useState(false);
 
   const polygonProvider = new ThirdwebSDK(POLYGON_CHAIN);
   const vitruveoProvider = new ThirdwebSDK(VITRUVEO_CHAIN);
@@ -95,16 +92,16 @@ export default function Home(props:Props) {
 
   }, [currentFrom]);
 
-  const toDisplay = (value:number) => {
+  const toDisplay = (value) => {
     return (value/10**6).toFixed(2);
   }
 
   const inputInvalid = () => {
     let tooBig = true;
     if (currentFrom === 'usdc') {
-      tooBig = (Number(usdcValue) - 0.25) > Number(usdcBalance/10**6);
+      tooBig = (Number(usdcValue) - 0.25) >= Number(usdcBalance/10**6);
     } else {
-      tooBig = (Number(usdcValue) - 0.25) > Number(usdcPolBalance/10**6);
+      tooBig = (Number(usdcValue) - 0.25) >= Number(usdcPolBalance/10**6);
     }
     return Number(usdcValue) <= 0.25 || tooBig;
   }
@@ -142,7 +139,7 @@ export default function Home(props:Props) {
 
         // Fund gas for account
         try {
-          const requestHeaders: HeadersInit = new Headers();
+          const requestHeaders = new Headers();
           requestHeaders.set('Content-Type', 'application/json');
           requestHeaders.set('X-Api-Key', String(process.env.API_KEY));
 
@@ -262,7 +259,7 @@ export default function Home(props:Props) {
             style={{ fontWeight: 400, background: 'linear-gradient(106.4deg, rgb(255, 104, 192) 11.1%, rgb(104, 84, 249) 81.3%)', color: '#ffffff'}}
           >
             {/* <img src='/images/usdc-logo.png' style={{width: '30px', marginRight: '10px'}} /> */}
-            {loading ? <Spinner /> : " Bridge Token"}
+            {loading ? <Spinner /> : "Bridge Token"}
           </Button>
         ) : (
           <ConnectWallet
@@ -270,9 +267,9 @@ export default function Home(props:Props) {
             theme="dark"
           />
         )}
-        <p><sup>*</sup> Each bridge transfer takes 2-3 mins and costs US$0.25 plus gas.</p>
+        <p>Each bridge transfer takes 2-3 mins and costs US$0.25 plus gas. View in-flight bridge transactions at <a href="https://scan.vialabs.io" target="_new" style={{textDecoration: 'underline'}}>https://scan.vialabs.io</a></p>
       </Flex>
-      <div style={{textAlign: 'center', fontSize: '14px', marginTop: '5px'}}><a href="https://www.circle.com/blog/bridged-usdc-standard" target="_new" style={{textDecoration: 'underline'}}>Bridged USDC Standard</a> powered by <a href='https://cryptolink.tech/' target='_new'>VIA Labs</a>. &nbsp; &nbsp; Built with 💜 by <a href="https://www.vitruveo.xyz" target="_new">Vitruveo</a>.</div>
+      <div style={{textAlign: 'center', fontSize: '14px', marginTop: '5px'}}>Powered by <a href='https://vialabs.io/' target='_new'>VIA Labs</a>. &nbsp; &nbsp; Built with 💜 by <a href="https://www.vitruveo.xyz" target="_new">Vitruveo</a>.</div>
     </>
   );
 }

@@ -2,7 +2,7 @@ import { Button, HStack, Input } from "@chakra-ui/react";
 import React from "react";
 
 type Props = {
-  type: "usdc" | "usdcpol";
+  type: "coin" | "token";
   tokenSymbol?: string;
   tokenBalance: string
   current: string;
@@ -27,7 +27,7 @@ export default function SwapInput({
       <img src={`/images/${network}.png`} alt={`${network}`} style={{ display: 'inline', height: '25px' }}/> 
       <Input
         type="number"
-        placeholder="0.0"
+        placeholder="0"
         fontSize="3xl"
         value={value}
         onChange={(e) => setValue(e.target.value)}
@@ -44,7 +44,7 @@ export default function SwapInput({
       )}
       <div style={{ marginLeft: '20px', width: current === type ? '250px' : '200px'}}>
         <p>{tokenSymbol} Balance:</p>
-        <p>{tokenBalance}</p>
+        <p>{Number(tokenBalance).toLocaleString()}</p>
       </div>
     </HStack>
   );
