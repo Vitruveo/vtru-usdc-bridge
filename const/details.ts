@@ -1,10 +1,13 @@
-import { Chain, Polygon, Binance, Vitruveo } from "@thirdweb-dev/chains";
+import { Chain, Polygon, Binance, Ethereum, Vitruveo } from "@thirdweb-dev/chains";
 
 export const POLYGON_CHAIN: Chain = Polygon;
 export const USDC_TOKEN_CONTRACT: string = "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359";
 
 export const BINANCE_CHAIN: Chain = Binance;
 export const BINANCE_VTRU_TOKEN_CONTRACT: string = "0xb08504D245713Ca9692C8fA605E76A0A11Ed4955";
+
+export const ETHEREUM_CHAIN: Chain = Ethereum;
+export const ETHEREUM_VTRU_TOKEN_CONTRACT: string = "0x7070F01A2040bD06109C6fC478cd139b323459af";
 
 export const VITRUVEO_CHAIN: Chain = Vitruveo;
 export const USDCPOL_TOKEN_CONTRACT: string = "0xbCfB3FCa16b12C7756CD6C24f1cC0AC0E38569CF";

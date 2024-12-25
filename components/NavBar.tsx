@@ -20,7 +20,11 @@ export default function Navbar() {
 
         <ConnectWallet theme="dark" />
       </Flex>
-      <h2 style={{textAlign: 'center'}}><Link href="/" style={{display: 'inline-block', width: '100px', marginBottom: '10px'}}>VTRU</Link>   <Link href="/usdc" style={{display: 'inline-block', width: '100px', marginBottom: '10px'}}>USDC</Link></h2>
+      <h2 style={{textAlign: 'center'}}>
+        <Link href="/" style={{display: 'inline-block', width: '100px', marginBottom: '10px'}}>Binance</Link>   
+        <Link href="/eth" style={{display: 'inline-block', width: '100px', marginBottom: '10px'}}>Ethereum</Link>   
+        <Link href="/usdc" style={{display: 'inline-block', width: '100px', marginBottom: '10px'}}>USDC</Link>
+      </h2>
     </Box>
 
   );
