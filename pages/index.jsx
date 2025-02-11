@@ -97,6 +97,16 @@ export default function Home(props) {
     return (value/10**18).toFixed(0);
   }
 
+  const toMaxDisplay = (value) => {
+    let tmpValue = value/10**18;
+    if (tmpValue >= 1) {
+      tmpValue -= 1;
+    } else {
+      tmpValue = 0;
+    }
+    return (tmpValue).toFixed(0);
+  }
+
   const inputInvalid = () => {
     if (currentFrom === VITRUVEO) {
       return Number(vtruCoinValue) > Math.trunc(Number(vtruCoinBalance/10**18)) || Number(vtruCoinValue) == 0;
@@ -192,7 +202,7 @@ export default function Home(props) {
           <SwapInput
             current={currentFrom}
             type={VITRUVEO}
-            max={toDisplay(vtruCoinBalance)}
+            max={toMaxDisplay(vtruCoinBalance)}
             value={String(Math.trunc(Number(vtruCoinValue)).toFixed(0))}
             setValue={setVtruCoinValue}
             tokenSymbol="VTRU Coin"
@@ -215,7 +225,7 @@ export default function Home(props) {
           <SwapInput
             current={currentFrom}
             type="binance"
-            max={toDisplay(vtruBinanceTokenBalance)}
+            max={toMaxDisplay(vtruBinanceTokenBalance)}
             value={String(Math.trunc(Number(vtruCoinValue)).toFixed(0))}
             setValue={setVtruCoinValue}
             tokenSymbol="VTRU Token"
@@ -243,7 +253,8 @@ export default function Home(props) {
             theme="dark"
           />
         )}
-        <p>Each bridge transfer takes 2-3 mins. Bridge and gas fees waived until Dec. 31, 2024. View in-flight bridge transactions at <a href="https://scan.vialabs.io" target="_new" style={{textDecoration: 'underline'}}>https://scan.vialabs.io</a></p>
+        <p style={{textAlign: "center"}}>Max amount reduced by 1 to prevent rounding and gas fee errors.</p>
+        <p style={{textAlign: "center"}}>Each bridge transfer takes 2-3 mins. Bridge and gas fees currently waived. View in-flight bridge transactions at <a href="https://scan.vialabs.io" target="_new" style={{textDecoration: 'underline'}}>https://scan.vialabs.io</a></p>
       </Flex>
       <div style={{textAlign: 'center', fontSize: '14px', marginTop: '5px'}}>Powered by <a href='https://vialabs.io/' target='_new'>VIA Labs</a>. &nbsp; &nbsp; Built with 💜 by <a href="https://www.vitruveo.xyz" target="_new">Vitruveo</a>.</div>
     </>

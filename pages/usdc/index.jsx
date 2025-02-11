@@ -59,8 +59,17 @@ export default function Home(props) {
         const polygonUSDC = await polygonProvider.getContract(USDC_TOKEN_CONTRACT, usdcAbi);
         const vitruveoUSDC = await vitruveoProvider.getContract(USDCPOL_TOKEN_CONTRACT, usdcAbi);
         
-        setUsdcBalance(await polygonUSDC.call('balanceOf', [address]));
-        setUsdcPolBalance(await vitruveoUSDC.call('balanceOf', [address]));
+        let polyBal = Math.trunc((await polygonUSDC.call('balanceOf', [address]))/10**6);
+        if (polyBal > 0) {
+          polyBal -= 1;
+        }
+        setUsdcBalance(polyBal * 10**6);
+
+        let vitBal = Math.trunc((await vitruveoUSDC.call('balanceOf', [address]))/10**6);
+        if (vitBal > 0) {
+          vitBal -= 1;
+        }
+        setUsdcPolBalance(vitBal * 10**6);
   
         setUsdcAllowance(await polygonUSDC.call('allowance', [address, VIA_POLYGON_CONTRACT]));
         setUsdcPolAllowance(await vitruveoUSDC.call('allowance', [address, VIA_VITRUVEO_CONTRACT]));        
@@ -94,6 +103,17 @@ export default function Home(props) {
 
   const toDisplay = (value) => {
     return (value/10**6).toFixed(2);
+  }
+
+
+  const toMaxDisplay = (value) => {
+    let tmpValue = value/10**6;
+    if (tmpValue >= 1) {
+      tmpValue -= 1;
+    } else {
+      tmpValue = 0;
+    }
+    return (tmpValue).toFixed(0);
   }
 
   const inputInvalid = () => {
@@ -132,7 +152,7 @@ export default function Home(props) {
         }
           
         if (Number(usdcAllowance) < amount) {
-          await approveUsdcSpending({args: [VIA_POLYGON_CONTRACT, amount] });
+          await approveUsdcSpending({args: [VIA_POLYGON_CONTRACT, 1000000 * 10**6] });
         }
 
         await bridgeUSDCToUSDCPOL({ args: [address, amount] });
@@ -162,7 +182,7 @@ export default function Home(props) {
           await switchChain(VITRUVEO_CHAIN.chainId);
         }
         if (Number(usdcPolAllowance) < amount) {
-          await approveUsdcPolSpending({ args: [VIA_VITRUVEO_CONTRACT, amount] });
+          await approveUsdcPolSpending({ args: [VIA_VITRUVEO_CONTRACT, 1000000 * 10**6] });
         }
         await bridgeUSDCPOLToUSDC({ args: [address, amount] });
 
@@ -216,7 +236,7 @@ export default function Home(props) {
           <SwapInput
             current={currentFrom}
             type="usdc"
-            max={toDisplay(usdcBalance)}
+            max={toMaxDisplay(usdcBalance)}
             value={String(currentFrom === 'usdc' ? Math.floor(Number(usdcValue)).toFixed(0) : Math.max(0,Math.floor(Number(usdcValue))-0.25).toFixed(2))}
             setValue={setUsdcValue}
             tokenSymbol="USDC"
@@ -239,7 +259,7 @@ export default function Home(props) {
           <SwapInput
             current={currentFrom}
             type="usdcpol"
-            max={toDisplay(usdcPolBalance)}
+            max={toMaxDisplay(usdcPolBalance)}
             value={String(currentFrom === 'usdcpol' ? Math.floor(Number(usdcValue)).toFixed(0) : Math.max(0,Math.floor(Number(usdcValue))-0.25).toFixed(2))}
             setValue={setUsdcValue}
             tokenSymbol="USDC.pol"
@@ -267,7 +287,8 @@ export default function Home(props) {
             theme="dark"
           />
         )}
-        <p>Each bridge transfer takes 2-3 mins and costs US$0.25 plus gas. View in-flight bridge transactions at <a href="https://scan.vialabs.io" target="_new" style={{textDecoration: 'underline'}}>https://scan.vialabs.io</a></p>
+        <p style={{textAlign: "center"}}>Max amount reduced by 1 to prevent rounding and gas fee errors.</p>
+        <p style={{textAlign: "center"}}>Each bridge transfer takes 2-3 mins. Bridge and gas fees currently waived. View in-flight bridge transactions at <a href="https://scan.vialabs.io" target="_new" style={{textDecoration: 'underline'}}>https://scan.vialabs.io</a></p>
       </Flex>
       <div style={{textAlign: 'center', fontSize: '14px', marginTop: '5px'}}>Powered by <a href='https://vialabs.io/' target='_new'>VIA Labs</a>. &nbsp; &nbsp; Built with 💜 by <a href="https://www.vitruveo.xyz" target="_new">Vitruveo</a>.</div>
     </>
