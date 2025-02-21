@@ -1586,3 +1586,648 @@ export const VTRU_ABI: string = `[
     }
 ]`;
 
+export const SUPPLY_SENTRY_ABI: string = `[
+      {
+        "type": "event",
+        "anonymous": false,
+        "name": "AdminChanged",
+        "inputs": [
+          {
+            "type": "address",
+            "name": "previousAdmin",
+            "indexed": false
+          },
+          {
+            "type": "address",
+            "name": "newAdmin",
+            "indexed": false
+          }
+        ]
+      },
+      {
+        "type": "event",
+        "anonymous": false,
+        "name": "BeaconUpgraded",
+        "inputs": [
+          {
+            "type": "address",
+            "name": "beacon",
+            "indexed": true
+          }
+        ]
+      },
+      {
+        "type": "event",
+        "anonymous": false,
+        "name": "Initialized",
+        "inputs": [
+          {
+            "type": "uint8",
+            "name": "version",
+            "indexed": false
+          }
+        ]
+      },
+      {
+        "type": "event",
+        "anonymous": false,
+        "name": "Paused",
+        "inputs": [
+          {
+            "type": "address",
+            "name": "account",
+            "indexed": false
+          }
+        ]
+      },
+      {
+        "type": "event",
+        "anonymous": false,
+        "name": "RoleAdminChanged",
+        "inputs": [
+          {
+            "type": "bytes32",
+            "name": "role",
+            "indexed": true
+          },
+          {
+            "type": "bytes32",
+            "name": "previousAdminRole",
+            "indexed": true
+          },
+          {
+            "type": "bytes32",
+            "name": "newAdminRole",
+            "indexed": true
+          }
+        ]
+      },
+      {
+        "type": "event",
+        "anonymous": false,
+        "name": "RoleGranted",
+        "inputs": [
+          {
+            "type": "bytes32",
+            "name": "role",
+            "indexed": true
+          },
+          {
+            "type": "address",
+            "name": "account",
+            "indexed": true
+          },
+          {
+            "type": "address",
+            "name": "sender",
+            "indexed": true
+          }
+        ]
+      },
+      {
+        "type": "event",
+        "anonymous": false,
+        "name": "RoleRevoked",
+        "inputs": [
+          {
+            "type": "bytes32",
+            "name": "role",
+            "indexed": true
+          },
+          {
+            "type": "address",
+            "name": "account",
+            "indexed": true
+          },
+          {
+            "type": "address",
+            "name": "sender",
+            "indexed": true
+          }
+        ]
+      },
+      {
+        "type": "event",
+        "anonymous": false,
+        "name": "TradeBalanceIncreased",
+        "inputs": [
+          {
+            "type": "address",
+            "name": "account",
+            "indexed": true
+          },
+          {
+            "type": "uint256",
+            "name": "newBalance",
+            "indexed": false
+          },
+          {
+            "type": "uint256",
+            "name": "chainId",
+            "indexed": false
+          }
+        ]
+      },
+      {
+        "type": "event",
+        "anonymous": false,
+        "name": "TradeIn",
+        "inputs": [
+          {
+            "type": "address",
+            "name": "account",
+            "indexed": true
+          },
+          {
+            "type": "uint256",
+            "name": "amount",
+            "indexed": false
+          },
+          {
+            "type": "uint256",
+            "name": "sourceChainId",
+            "indexed": false
+          }
+        ]
+      },
+      {
+        "type": "event",
+        "anonymous": false,
+        "name": "TradeOut",
+        "inputs": [
+          {
+            "type": "address",
+            "name": "account",
+            "indexed": true
+          },
+          {
+            "type": "uint256",
+            "name": "amount",
+            "indexed": false
+          },
+          {
+            "type": "uint256",
+            "name": "destChainId",
+            "indexed": false
+          }
+        ]
+      },
+      {
+        "type": "event",
+        "anonymous": false,
+        "name": "Unpaused",
+        "inputs": [
+          {
+            "type": "address",
+            "name": "account",
+            "indexed": false
+          }
+        ]
+      },
+      {
+        "type": "event",
+        "anonymous": false,
+        "name": "Upgraded",
+        "inputs": [
+          {
+            "type": "address",
+            "name": "implementation",
+            "indexed": true
+          }
+        ]
+      },
+      {
+        "type": "function",
+        "name": "BLOCK_LIST_CONTRACT",
+        "constant": true,
+        "stateMutability": "view",
+        "payable": false,
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "address",
+            "name": ""
+          }
+        ]
+      },
+      {
+        "type": "function",
+        "name": "DEFAULT_ADMIN_ROLE",
+        "constant": true,
+        "stateMutability": "view",
+        "payable": false,
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "bytes32",
+            "name": ""
+          }
+        ]
+      },
+      {
+        "type": "function",
+        "name": "ETHEREUM",
+        "constant": true,
+        "stateMutability": "view",
+        "payable": false,
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "uint256",
+            "name": ""
+          }
+        ]
+      },
+      {
+        "type": "function",
+        "name": "GRANTER_ROLE",
+        "constant": true,
+        "stateMutability": "view",
+        "payable": false,
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "bytes32",
+            "name": ""
+          }
+        ]
+      },
+      {
+        "type": "function",
+        "name": "SERVICE_ROLE",
+        "constant": true,
+        "stateMutability": "view",
+        "payable": false,
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "bytes32",
+            "name": ""
+          }
+        ]
+      },
+      {
+        "type": "function",
+        "name": "UPGRADER_ROLE",
+        "constant": true,
+        "stateMutability": "view",
+        "payable": false,
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "bytes32",
+            "name": ""
+          }
+        ]
+      },
+      {
+        "type": "function",
+        "name": "VITRUVEO",
+        "constant": true,
+        "stateMutability": "view",
+        "payable": false,
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "uint256",
+            "name": ""
+          }
+        ]
+      },
+      {
+        "type": "function",
+        "name": "getRoleAdmin",
+        "constant": true,
+        "stateMutability": "view",
+        "payable": false,
+        "inputs": [
+          {
+            "type": "bytes32",
+            "name": "role"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "bytes32",
+            "name": ""
+          }
+        ]
+      },
+      {
+        "type": "function",
+        "name": "grantRole",
+        "constant": false,
+        "payable": false,
+        "inputs": [
+          {
+            "type": "bytes32",
+            "name": "role"
+          },
+          {
+            "type": "address",
+            "name": "account"
+          }
+        ],
+        "outputs": []
+      },
+      {
+        "type": "function",
+        "name": "hasRole",
+        "constant": true,
+        "stateMutability": "view",
+        "payable": false,
+        "inputs": [
+          {
+            "type": "bytes32",
+            "name": "role"
+          },
+          {
+            "type": "address",
+            "name": "account"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "bool",
+            "name": ""
+          }
+        ]
+      },
+      {
+        "type": "function",
+        "name": "increaseTradeBalance",
+        "constant": false,
+        "payable": false,
+        "inputs": [
+          {
+            "type": "address",
+            "name": "account"
+          },
+          {
+            "type": "uint256",
+            "name": "amount"
+          },
+          {
+            "type": "uint256",
+            "name": "chainId"
+          }
+        ],
+        "outputs": []
+      },
+      {
+        "type": "function",
+        "name": "initialize",
+        "constant": false,
+        "payable": false,
+        "inputs": [],
+        "outputs": []
+      },
+      {
+        "type": "function",
+        "name": "isTradeAllowed",
+        "constant": true,
+        "stateMutability": "view",
+        "payable": false,
+        "inputs": [
+          {
+            "type": "address",
+            "name": "account"
+          },
+          {
+            "type": "uint256",
+            "name": "amount"
+          },
+          {
+            "type": "uint256",
+            "name": "chainId"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "bool",
+            "name": ""
+          }
+        ]
+      },
+      {
+        "type": "function",
+        "name": "pause",
+        "constant": false,
+        "payable": false,
+        "inputs": [],
+        "outputs": []
+      },
+      {
+        "type": "function",
+        "name": "paused",
+        "constant": true,
+        "stateMutability": "view",
+        "payable": false,
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "bool",
+            "name": ""
+          }
+        ]
+      },
+      {
+        "type": "function",
+        "name": "proxiableUUID",
+        "constant": true,
+        "stateMutability": "view",
+        "payable": false,
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "bytes32",
+            "name": ""
+          }
+        ]
+      },
+      {
+        "type": "function",
+        "name": "renounceRole",
+        "constant": false,
+        "payable": false,
+        "inputs": [
+          {
+            "type": "bytes32",
+            "name": "role"
+          },
+          {
+            "type": "address",
+            "name": "account"
+          }
+        ],
+        "outputs": []
+      },
+      {
+        "type": "function",
+        "name": "revokeRole",
+        "constant": false,
+        "payable": false,
+        "inputs": [
+          {
+            "type": "bytes32",
+            "name": "role"
+          },
+          {
+            "type": "address",
+            "name": "account"
+          }
+        ],
+        "outputs": []
+      },
+      {
+        "type": "function",
+        "name": "supportsInterface",
+        "constant": true,
+        "stateMutability": "view",
+        "payable": false,
+        "inputs": [
+          {
+            "type": "bytes4",
+            "name": "interfaceId"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "bool",
+            "name": ""
+          }
+        ]
+      },
+      {
+        "type": "function",
+        "name": "swapTradeBalance",
+        "constant": false,
+        "payable": false,
+        "inputs": [
+          {
+            "type": "address",
+            "name": "account"
+          }
+        ],
+        "outputs": []
+      },
+      {
+        "type": "function",
+        "name": "tradeBalance",
+        "constant": true,
+        "stateMutability": "view",
+        "payable": false,
+        "inputs": [
+          {
+            "type": "address",
+            "name": "account"
+          },
+          {
+            "type": "uint256",
+            "name": "chainId"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "uint256",
+            "name": ""
+          }
+        ]
+      },
+      {
+        "type": "function",
+        "name": "tradeIn",
+        "constant": false,
+        "payable": false,
+        "inputs": [
+          {
+            "type": "address",
+            "name": "account"
+          },
+          {
+            "type": "uint256",
+            "name": "amount"
+          },
+          {
+            "type": "uint256",
+            "name": "sourceChainId"
+          }
+        ],
+        "outputs": []
+      },
+      {
+        "type": "function",
+        "name": "tradeOut",
+        "constant": false,
+        "payable": false,
+        "inputs": [
+          {
+            "type": "address",
+            "name": "account"
+          },
+          {
+            "type": "uint256",
+            "name": "amount"
+          },
+          {
+            "type": "uint256",
+            "name": "destChainId"
+          }
+        ],
+        "outputs": []
+      },
+      {
+        "type": "function",
+        "name": "unpause",
+        "constant": false,
+        "payable": false,
+        "inputs": [],
+        "outputs": []
+      },
+      {
+        "type": "function",
+        "name": "upgradeTo",
+        "constant": false,
+        "payable": false,
+        "inputs": [
+          {
+            "type": "address",
+            "name": "newImplementation"
+          }
+        ],
+        "outputs": []
+      },
+      {
+        "type": "function",
+        "name": "upgradeToAndCall",
+        "constant": false,
+        "stateMutability": "payable",
+        "payable": true,
+        "inputs": [
+          {
+            "type": "address",
+            "name": "newImplementation"
+          },
+          {
+            "type": "bytes",
+            "name": "data"
+          }
+        ],
+        "outputs": []
+      },
+      {
+        "type": "function",
+        "name": "version",
+        "constant": true,
+        "stateMutability": "pure",
+        "payable": false,
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "string",
+            "name": ""
+          }
+        ]
+      }
+    ]`
+
