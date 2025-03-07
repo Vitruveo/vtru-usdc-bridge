@@ -228,7 +228,8 @@ export default function Home(props) {
         borderColor="gray.600"
       >
               <h2 style={{fontSize: '24px', fontWeight: 600, margin: 'auto', marginBottom: '20px'}}>Vitruveo USDC Bridge</h2>
-        <p style={{marginBottom: 10}}>The Vitruveo USDC Bridge is a fast and easy way to bridge USDC (Polygon) to/from USDC.pol (Vitruveo).</p>
+        <p style={{marginBottom: 5}}>The Vitruveo USDC Bridge is a fast and easy way to bridge USDC (Polygon) to/from USDC.pol (Vitruveo).</p>
+        <p style={{marginBottom: 10, textAlign: "center"}}><span style={{color: '#ffff33'}}>Each bridge transfer takes 2-3 mins. Bridge fee of 2% may be charged.</span></p>
         <Flex
           direction={currentFrom === "usdc" ? "column" : "column-reverse"}
           gap="3"
@@ -287,8 +288,7 @@ export default function Home(props) {
             theme="dark"
           />
         )}
-        <p style={{textAlign: "center"}}>Max amount reduced by 1 to prevent rounding and gas fee errors.</p>
-        <p style={{textAlign: "center"}}>Each bridge transfer takes 2-3 mins. Bridge and gas fees currently waived. View in-flight bridge transactions at <a href="https://scan.vialabs.io" target="_new" style={{textDecoration: 'underline'}}>https://scan.vialabs.io</a></p>
+        <p style={{textAlign: "center"}}>View in-flight bridge transactions at <a href="https://scan.vialabs.io" target="_new" style={{textDecoration: 'underline'}}>https://scan.vialabs.io</a></p>
       </Flex>
       <div style={{textAlign: 'center', fontSize: '14px', marginTop: '5px'}}>Powered by <a href='https://vialabs.io/' target='_new'>VIA Labs</a>. &nbsp; &nbsp; Built with 💜 by <a href="https://www.vitruveo.xyz" target="_new">Vitruveo</a>.</div>
     </>

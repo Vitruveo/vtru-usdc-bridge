@@ -32,7 +32,6 @@ export default function Home(props) {
   const switchChain = useSwitchChain();
 
   const vtruAbi = JSON.parse(VTRU_ABI);
-  const supplySentryAbi = JSON.parse(SUPPLY_SENTRY_ABI);
 
   const [currentFrom, setCurrentFrom] = useState(VITRUVEO);
   const [loading, setLoading] = useState(false);
@@ -46,9 +45,6 @@ export default function Home(props) {
   
   const [vtruCoinValue, setVtruCoinValue] = useState("0");
 
-  const [tradeBalance, setTradeBalance] = useState(0);
-  const SUPPLY_SENTRY_CONTRACT = '0x00d266bD859D5d9e54D6dB1aC774E56352c53705';
-
   
   // Need to read from both networks regardless of which is connected so we fall back to SDK
   useEffect(() => {
@@ -61,7 +57,6 @@ export default function Home(props) {
 
       try {
         const binanceVtruContract = await binanceProvider.getContract(BINANCE_VTRU_TOKEN_CONTRACT, vtruAbi);
-        const supplySentryContract = await vitruveoProvider.getContract(SUPPLY_SENTRY_CONTRACT, supplySentryAbi);
 
         const coinBalance = await vitruveoProvider.getBalance(address);
         const vtruCoinBalance = Number(coinBalance.value);
@@ -69,7 +64,6 @@ export default function Home(props) {
         setVtruCoinBalance(vtruCoinBalance);
         setVtruBinanceTokenBalance(await binanceVtruContract.call('balanceOf', [address]));
         setVtruBinanceTokenAllowance(await binanceVtruContract.call('allowance', [address, BINANCE_VTRU_TOKEN_CONTRACT]));
-        setTradeBalance(await supplySentryContract.call('tradeBalance', [address, 56]));
 
       } catch(e) {
 
@@ -200,7 +194,8 @@ export default function Home(props) {
         borderColor="gray.600"
       >
               <h2 style={{fontSize: '24px', fontWeight: 600, margin: 'auto', marginBottom: '20px'}}>Vitruveo VTRU Binance Bridge</h2>
-        <p style={{marginBottom: 10}}>The Vitruveo VTRU Bridge is a fast and easy way to bridge the VTRU coin on Vitruveo to/from the VTRU token on other chains.</p>
+        <p style={{marginBottom: 5}}>The Vitruveo VTRU Bridge is a fast and easy way to bridge the VTRU coin on Vitruveo to/from the VTRU token on BSC.</p>
+        <p style={{marginBottom: 10, textAlign: "center"}}><span style={{color: '#ffff33'}}>Each bridge transfer to BSC incurs a 10% fee.</span></p>
         <Flex
           direction={currentFrom === VITRUVEO ? "column" : "column-reverse"}
           gap="3"
@@ -259,9 +254,7 @@ export default function Home(props) {
             theme="dark"
           />
         )}
-        <p style={{textAlign: "center"}}>Bridge Allowance to BSC: {(Number(tradeBalance)/Math.pow(10, 18)).toLocaleString()}</p>
-        <p style={{textAlign: "center"}}>Max amount reduced by 1 to prevent rounding and gas fee errors.</p>
-        <p style={{textAlign: "center"}}>Each bridge transfer takes 2-3 mins. Bridge and gas fees currently waived. View in-flight bridge transactions at <a href="https://scan.vialabs.io" target="_new" style={{textDecoration: 'underline'}}>https://scan.vialabs.io</a></p>
+        <p style={{textAlign: "center"}}>View in-flight bridge transactions at <a href="https://scan.vialabs.io" target="_new" style={{textDecoration: 'underline'}}>https://scan.vialabs.io</a></p>
       </Flex>
       <div style={{textAlign: 'center', fontSize: '14px', marginTop: '5px'}}>Powered by <a href='https://vialabs.io/' target='_new'>VIA Labs</a>. &nbsp; &nbsp; Built with 💜 by <a href="https://www.vitruveo.xyz" target="_new">Vitruveo</a>.</div>
     </>
