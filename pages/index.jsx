@@ -195,7 +195,7 @@ export default function Home(props) {
       >
               <h2 style={{fontSize: '24px', fontWeight: 600, margin: 'auto', marginBottom: '20px'}}>Vitruveo VTRU Binance Bridge</h2>
         <p style={{marginBottom: 5}}>The Vitruveo VTRU Bridge is a fast and easy way to bridge the VTRU coin on Vitruveo to/from the VTRU token on BSC.</p>
-        <p style={{marginBottom: 10, textAlign: "center"}}><span style={{color: '#ffff33'}}>Each bridge transfer to BSC incurs a 10% fee.</span></p>
+        <p style={{marginBottom: 10, textAlign: "center"}}><span style={{color: '#ffff33'}}>Bridge fee of 10% paused until 5 p.m. PDT, May 12, 2025</span></p>
         <Flex
           direction={currentFrom === VITRUVEO ? "column" : "column-reverse"}
           gap="3"
