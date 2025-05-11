@@ -91,15 +91,15 @@ export default function Home(props) {
 
   useEffect(() => {
     async function activateChain() {
+      if (!isMismatched) return;
       if (currentFrom === "usdc") {
-        props.chainSwitchHandler(POLYGON_CHAIN);
+        await switchChain(POLYGON_CHAIN.chainId);
       } else {
-        props.chainSwitchHandler(VITRUVEO_CHAIN);       
+        await switchChain(VITRUVEO_CHAIN.chainId);
       }
     }
     activateChain();
-
-  }, [currentFrom]);
+  }, [currentFrom, isMismatched]);
 
   const toDisplay = (value) => {
     return (value/10**6).toFixed(2);
