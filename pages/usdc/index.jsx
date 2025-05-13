@@ -91,15 +91,15 @@ export default function Home(props) {
 
   useEffect(() => {
     async function activateChain() {
-      if (!isMismatched) return;
       if (currentFrom === "usdc") {
-        await switchChain(POLYGON_CHAIN.chainId);
+        props.chainSwitchHandler(POLYGON_CHAIN);
       } else {
-        await switchChain(VITRUVEO_CHAIN.chainId);
+        props.chainSwitchHandler(VITRUVEO_CHAIN);       
       }
     }
     activateChain();
-  }, [currentFrom, isMismatched]);
+
+  }, [currentFrom]);
 
   const toDisplay = (value) => {
     return (value/10**6).toFixed(2);
@@ -228,7 +228,6 @@ export default function Home(props) {
         borderColor="gray.600"
       >
               <h2 style={{fontSize: '24px', fontWeight: 600, margin: 'auto', marginBottom: '20px'}}>Vitruveo USDC Bridge</h2>
-              <h2 style={{color: "red"}}>The USDC bridge is currently experiencing degraded service from ThirdWeb, a third-party provider. This note will be removed when service is restored.</h2>
         <p style={{marginBottom: 5}}>The Vitruveo USDC Bridge is a fast and easy way to bridge USDC (Polygon) to/from USDC.pol (Vitruveo).</p>
         <p style={{marginBottom: 10, textAlign: "center"}}><span style={{color: '#ffff33'}}>Each bridge transfer takes 2-3 mins. Bridge fee of 2% may be charged.</span></p>
         <Flex
