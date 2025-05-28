@@ -229,7 +229,8 @@ export default function Home(props) {
       >
               <h2 style={{fontSize: '24px', fontWeight: 600, margin: 'auto', marginBottom: '20px'}}>Vitruveo USDC Bridge</h2>
         <p style={{marginBottom: 5}}>The Vitruveo USDC Bridge is a fast and easy way to bridge USDC (Polygon) to/from USDC.pol (Vitruveo).</p>
-        <p style={{marginBottom: 10, textAlign: "center"}}><span style={{color: '#ffff33'}}>Each bridge transfer takes 2-3 mins. Bridge fee of 2% may be charged.</span></p>
+        <p style={{marginBottom: 10, textAlign: "center"}}><span style={{color: '#ffff33'}}>Bridge fee of $1/transaction currently discounted to $0.25</span></p>
+
         <Flex
           direction={currentFrom === "usdc" ? "column" : "column-reverse"}
           gap="3"
